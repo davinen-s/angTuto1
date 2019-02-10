@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../shared/model/product';
+import {ProductService} from '../shared/service/product.servics';
 
 /**
  * Component allowing user to view all products and perform search via a filter.
@@ -17,7 +18,7 @@ export class ProductListComponent implements OnInit {
   pageTitle = 'Product List View';
 
   /**  List of products. */
-  products: Product[] = require('src/mock_object/products.json');
+  products: Product[];
 
   /** The product list(#products) filtered by the #listFilter. */
   filteredProduct: Product[];
@@ -32,35 +33,44 @@ export class ProductListComponent implements OnInit {
   showImage = false;
 
   /** The filter text entered by the user. */
-  private _listFilter: string;
+  private pListFilter: string;
+
+  errorMessage: string;
+
+  /**
+   * Class constructor.
+   * @param productService Product service.
+   */
+  constructor( private productService: ProductService) {
+  }
+
+  /** Component initialization and good place to retrieve data. */
+  ngOnInit(): void {
+    this.productService.getProducts().subscribe(
+      retrievedProducts => {
+        this.products = retrievedProducts;
+        this.filteredProduct  = this.products;
+      },
+        error => this.errorMessage = error as any
+    );
+  }
 
   /**
    * Getter method for listFilter.
    */
   get listFilter(): string {
-    return this._listFilter;
+    return this.pListFilter;
   }
 
   /**
    * Setter method for listFilter. Also trigger filtering if listFilter is not blank.
    */
   set listFilter(value: string) {
-    this._listFilter = value;
-    this.filteredProduct = this._listFilter ? this.performFilter(this._listFilter) : this.products;
+    this.pListFilter = value;
+    this.filteredProduct = this.pListFilter ? this.performFilter(this.pListFilter) : this.products;
 
   }
 
-  /**
-   * Class constructor.
-   */
-  constructor() {
-    this.filteredProduct  = this.products;
-    this.listFilter = 'cart';
-   }
-
-  /** Component initialization and good place to retrieve data. */
-  ngOnInit() {
-  }
 
   /**
    * Toggle the visibility of images and the text of the toggle button by changing the display flag.

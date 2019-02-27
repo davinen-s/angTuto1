@@ -1,13 +1,26 @@
 import { Component } from '@angular/core';
 
+
+/**
+ * Main/Root component.
+ *
+ * @author davinen.s.curoopen
+ */
 @Component({
   selector: 'app-root',
- // templateUrl: './app.component.html',
  template: `
-  <div> <h1> {{pageTitle}}</h1>
-    <app-product-list></app-product-list>
-  </div>
- `,
+   <nav class="navbar navbar-expand navbar-light bg-light">
+     <a class="navbar-brand">{{pageTitle}}</a>
+     <ul class="nav nav-pills">
+       <li><a class="nav-link" [routerLink]="['/welcome']">Home</a> </li>
+       <li><a class="nav-link" [routerLink]="['/products']">Product List</a> </li>
+     </ul>
+   </nav>
+
+   <div class="container">
+     <router-outlet></router-outlet>
+   </div>
+   `,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {

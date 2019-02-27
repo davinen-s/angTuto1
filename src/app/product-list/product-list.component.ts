@@ -8,7 +8,6 @@ import {ProductService} from '../shared/service/product.servics';
  * @author davinen.s.curoopen
  */
 @Component({
-  selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })

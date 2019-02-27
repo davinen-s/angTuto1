@@ -9,14 +9,18 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ConvertToSpacesPipe } from './shared/pipes/convert-to-spaces.pipe';
 import { StarComponent } from './shared/component/star.component';
 import {HttpClientModule} from '@angular/common/http';
+import {WelcomeComponent} from './home/welcome.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [ // our components, directive and pipes are declared here
     AppComponent,
     AboutComponent,
+    WelcomeComponent,
     ProductListComponent,
     StarComponent,
-    ConvertToSpacesPipe
+    ConvertToSpacesPipe,
+    ProductDetailComponent
   ],
   imports: [ // third party/external stuff are declared here.
     BrowserModule,
